@@ -166,12 +166,11 @@ if __name__ == "__main__":
     ax1.set_xlabel("Time until first forecast (days)", fontsize=10)
     ax1.set_ylim([-0.5,4.5])
     ax1.get_xticklabels()[4].set_horizontalalignment("left")
+
+    #--stamp
+    ax0.text(0.01,0.99,s="A.",fontsize=10,fontweight="bold",ha="left",va="top",transform=ax0.transAxes)
     
 
-    #for close in wis.open_to_close.unique():
-    #    ax0.axvline(close,color="k",alpha=0.75,lw=1)
-    #    ax1.axvline(close,color="k",alpha=0.75,lw=1)
-    
     #--when do the most revisions occur?
 
     submissions = wis[["question_id","user_id","horizon","revision_number","time_from_revision_to_truth"]]
@@ -250,6 +249,10 @@ if __name__ == "__main__":
     ax1.set_xlabel("Time of submitted forecast (days)", fontsize=10)
     ax1.set_ylim([-0.5,4.5])
     ax1.get_xticklabels()[4].set_horizontalalignment("left")
+
+    #--stamp
+    ax0.text(0.01,0.99,s="B.",fontsize=10,fontweight="bold",ha="left",va="top",transform=ax0.transAxes)
+ 
 
     #--final revision
     def last_submit(x):
@@ -335,6 +338,9 @@ if __name__ == "__main__":
     ax1.set_ylim([-0.5,4.5])
     ax1.get_xticklabels()[4].set_horizontalalignment("left")
 
+    #--stamp
+    ax0.text(0.01,0.99,s="C.",fontsize=10,fontweight="bold",ha="left",va="top",transform=ax0.transAxes)
+
     #--wis score correlate with time to revision
     ax =  fig.add_subplot(gs[1,1])
     def norm_wis(x):
@@ -366,13 +372,17 @@ if __name__ == "__main__":
         ax.plot(modelx,modely, color = colors[n], lw=1,alpha=1., label = fromQid2Labels[qid])
 
     ax.invert_xaxis()
-
     
-    ax.legend(frameon=False,fontsize=9,loc="upper left",ncol=2,labelspacing=0.25, columnspacing=0.5, handlelength=1.0)
+    ax.legend(frameon=False,fontsize=9,loc="upper left",ncol=2,labelspacing=0.25, columnspacing=0.5, handlelength=1.0, bbox_to_anchor=(0.01,0.975 ))
     
     ax.set_ylabel("Normalized WIS", fontsize=10)
     ax.set_xlabel("Time from forecast to close (days)", fontsize=10)
-        
+
+    #--stamp
+    ax.text(0.01,0.99,s="D.",fontsize=10,fontweight="bold",ha="left",va="top",transform=ax.transAxes)
+
+
+    
     #--all plots
     for ax in fig.get_axes():
         ax.tick_params(which="both",labelsize=8)
